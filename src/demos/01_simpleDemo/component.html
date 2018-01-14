@@ -14,17 +14,30 @@
     <div id="example"></div>
 
     <script type="text/babel">
-        // creating component
+        // creating component (JSX ELEMENT)
         // component names are capitalized
         // components create custom HTML
+        // components can only return 1 parent element
         var Bacon = React.createClass({
             render: function () {
-                return (<h3>This is a simple component!</h3>)
+                return (
+                    <div>
+                        <h3>This is a simple component!</h3>
+                        <p>I am some sample text</p>
+                    </div>
+                )
             }
         });
 
         // renders html content in #example
-        ReactDOM.render(<Bacon />, document.getElementById('example'));
+        // adjacent JSX elements must be wraped in div
+        ReactDOM.render(
+            <div>
+                <Bacon />
+                <Bacon />
+                <Bacon />
+            </div>, 
+            document.getElementById('example'));
     </script>
 
 </body>
