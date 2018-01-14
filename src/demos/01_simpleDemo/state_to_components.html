@@ -30,6 +30,8 @@
 
             remove: function () {
                 console.log('Removing comment');
+                // able to access function from parent component through props
+                this.props.deleteFromBoard(this.props.index);
             },
 
             save: function () {
@@ -37,6 +39,9 @@
                 // .newText is the actual element
                 var val = this.refs.newText.value;
                 console.log("save, val:", val);
+                
+                // able to access function from parent component through props
+                this.props.updateCommentText(val, this.props.index);
 
                 this.setState({
                     editing: false
@@ -93,14 +98,20 @@
                 var arr = this.state.comments;
                 arr[i] = newText;
                 this.setState({comments: arr});
-            }
+            },
 
             // key attribute on component tag is used to identify each child
             // index allows you to access the Comment within an array
             // you can pass functions into ref attributes into component
+            // you can pass functions into properties 
             eachComment: function (text, i) {
                 return (
-                    <Comment key={i} index={i}>{text}</Comment>
+                    <Comment key={i} 
+                             index={i} 
+                             updateCommentText={this.updateComment} 
+                             deleteFromBoard={this.removeComment}>
+                        {text}
+                    </Comment>
                 );
             },
 
