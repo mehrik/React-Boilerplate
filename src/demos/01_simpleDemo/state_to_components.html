@@ -16,13 +16,30 @@
     <script type="text/babel">
         // must use "className" vs "class" in JSX, because "class" is a reserved name in JS
         var Comment = React.createClass({
+            getInitialState: function () {
+                return {
+                    editing: false
+                }
+            },
+
             edit: function () {
-                console.debug('Editing Comment');
+                this.setState({
+                    editing: true
+                });
             },
-            remove: function ()  {
-                console.debug('Removing Content');
+
+            remove: function () {
+                console.log('Removing comment');
             },
-            render: function ()  {
+
+            save: function () {
+                this.setState({
+                    editing: false
+                });
+            },
+
+            // renders normal content
+            renderNormal: function () {
                 return (
                     <div className="commentContainer">
                         <div className="commentText">{this.props.children}</div>
@@ -30,6 +47,20 @@
                         <button onClick={this.remove} className="button-danger">Remove</button>
                     </div>
                 );
+            },
+
+            // renders the form for editing mode
+            renderForm: function () {
+                return (
+                    <div className="commentContainer">
+                        <textarea defaultValue={this.props.children}></textarea> 
+                        <button onClick={this.save} className="button-success">Save</button>
+                    </div>
+                );
+            },
+
+            render: function ()  {
+                return this.state.editing ? this.renderForm() : this.renderNormal();
             }
         })
 
