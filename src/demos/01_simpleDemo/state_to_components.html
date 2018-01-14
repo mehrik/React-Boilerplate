@@ -78,12 +78,14 @@
         var Board = React.createClass({
             getInitialState: function () {
                 return {
-                    comments: [
-                        'Dope 0',
-                        'Sweet 1',
-                        'Awesome 2'
-                    ]
+                    comments: []
                 }
+            },
+
+            add: function (text) {
+                var arr = this.state.comments;
+                arr.push(text);
+                this.setState({comments: arr});
             },
 
             removeComment: function (i) {
@@ -115,12 +117,17 @@
                 );
             },
 
+            // use bind on function to pass variables into function
             render: function () {
                 return (
-                    <div className="board">
-                        {
-                            this.state.comments.map(this.eachComment)
-                        }
+                    <div>
+                        <button onClick={this.add.bind(null, 'New Comment')} 
+                                className="button-info create">
+                            Add New Comment
+                        </button>
+                        <div className="board">
+                            {this.state.comments.map(this.eachComment)}
+                        </div>
                     </div>
                 );
             }
