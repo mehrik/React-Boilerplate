@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>States</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        // states can change while properties are immutable
+
+        var Checkbox = React.createClass({
+
+            // native component function to set initial state variables
+            getInitialState: function () {
+                return {
+                    checked: true
+                }
+            },
+
+            // changes the state of checked
+            handleChecked: function () {
+                // this.setState is react function that allows you to set state of the component
+                // when state changes, component is automatically re-rendered
+                this.setState({checked: !this.state.checked});
+            },
+
+            render: function () {
+                var msg = this.state.checked ? 'checked' : 'unchecked';
+
+                return (
+                    <div>
+                        <input type="checkbox" 
+                               onChange={this.handleChecked} 
+                               defaultChecked={this.state.checked} />
+                        <h3>Checkbox is: {msg}</h3>
+                    </div>
+                );
+            }
+        })
+
+        ReactDOM.render(
+            <Checkbox></Checkbox>,
+            document.getElementById('container')
+        );
+    </script>
+
+</body>
+</html>
