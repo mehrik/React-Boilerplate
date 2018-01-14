@@ -68,16 +68,36 @@
             render: function ()  {
                 return this.state.editing ? this.renderForm() : this.renderNormal();
             }
-        })
+        });
 
+        var Board = React.createClass({
+            getInitialState: function () {
+                return {
+                    comments: [
+                        'Dope 0',
+                        'Sweet 1',
+                        'Awesome 2'
+                    ]
+                }
+            },
+
+            // key attribute on component tag is used to identify each child
+            render: function () {
+                return (
+                    <div className="board">
+                        {
+                            this.state.comments.map(function (text, i) {
+                                return (<Comment key={i}>{text}</Comment>);
+                            })
+                        }
+                    </div>
+                );
+            }
+        });
         // content within the component tag is the "children" property
         // children property can be accessed via {this.props.children}
         ReactDOM.render(
-            <div className="board">
-                <Comment>Event Handling</Comment>
-                <Comment>Something Cool</Comment>
-                <Comment>Something Better</Comment>
-            </div>,
+            <Board></Board>,
             document.getElementById('container')
         );
     </script>
