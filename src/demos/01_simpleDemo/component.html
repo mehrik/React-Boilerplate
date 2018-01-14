@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Demo</title>
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+</head>
+<body>
+    
+    <!-- target for where react is inserted -->
+    <div id="example"></div>
+
+    <script type="text/babel">
+        // creating component
+        // component names are capitalized
+        // components create custom HTML
+        var Bacon = React.createClass({
+            render: function () {
+                return (<h3>This is a simple component!</h3>)
+            }
+        });
+
+        // renders html content in #example
+        ReactDOM.render(<Bacon />, document.getElementById('example'));
+    </script>
+
+</body>
+</html>
